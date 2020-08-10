@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField'
-import textInput from '../../../components/TextInput'
-import TextInput from '../../../components/TextInput';
+
+import Button from '../../../components/Button';
 
 function CadastroCategoria() {
 
@@ -62,36 +62,15 @@ function CadastroCategoria() {
         />
 
 
-        <TextInput
+        <FormField
           label="Descrição"
-          type="text"
-          onChange={handleChange}
-          value={values.descricao}
+          type="textarea"
           name="descricao"
+          value={values.descricao}
+          onChange={handleChange}
         />
 
 
-        {/*<FormField
-          label="Descrição"
-          type="textInput"
-          name="descricao"
-          value={values.descricao}
-          onChange={handleChange}
-        />*/}
-
-
-
-        {/*<div>
-          <label>
-            Descrição:
-            <textarea
-              type="text"
-              value={values.descricao}
-              name="descricao"
-              onChange={handleChange}
-            />
-          </label>
-        </div>*/}
 
         <FormField
           label="Cor"
@@ -102,31 +81,19 @@ function CadastroCategoria() {
         />
 
 
-        {/*<div>
 
-          <label>
-            Cor:
-            <input
-              type="color"
-              value={values.cor}
-              name="cor"
-              onChange={handleChange}
-            />
-          </label>
-
-        </div>*/}
-
-
-        <button>
+        <Button>
           Cadastrar
-        </button>
+        </Button>
+
+
       </form>
 
 
       <ul>
         {categorias.map((categoria, indice) => {
           return (
-            <li key={`${categoria}${indice}`}>
+            <li key={`${categoria.nome}`}>
               {categoria.nome}
             </li>
           )
