@@ -38,8 +38,9 @@ function CadastroCategoria() {
   }*/
 
   useEffect(() => {
-    console.log('Alo galera') // oque eu eu quero que aconteça
-    const URL_TOP = 'http://localhost:8080/categorias';
+    const URL_TOP = window.location.hostname.includes('localhost')
+      ? 'http://localhost:8080/categorias'
+      : 'https://christianflix.herokuapp.com/categorias';
     fetch(URL_TOP)
       .then(async (respostaDoServidor) => {
         const resposta = await respostaDoServidor.json();
@@ -50,24 +51,24 @@ function CadastroCategoria() {
 
 
 
-/*    setTimeout(() => {
-      setCategorias([
-        ...categorias,
-        {
-          "id": 1,
-          "nome": "Front End",
-          "descricao": "Uma categoria",
-          "cor": "#cdb1ff"
-        },
-        {
-          "id": 2,
-          "nome": "Back End",
-          "descricao": "Outra categoria",
-          "cor": "#cdb1ff"
-        }
-      ]);
-
-    }, 4 * 1000)*/
+    /*    setTimeout(() => {
+          setCategorias([
+            ...categorias,
+            {
+              "id": 1,
+              "nome": "Front End",
+              "descricao": "Uma categoria",
+              "cor": "#cdb1ff"
+            },
+            {
+              "id": 2,
+              "nome": "Back End",
+              "descricao": "Outra categoria",
+              "cor": "#cdb1ff"
+            }
+          ]);
+    
+        }, 4 * 1000)*/
 
   },
     []                         //quando eu quero que aconteça 
@@ -123,12 +124,12 @@ function CadastroCategoria() {
         </Button>
       </form>
 
-      {categorias.length ===0 && (
-      <div>
-        {/*cargando*/}
+      {categorias.length === 0 && (
+        <div>
+          {/*cargando*/}
         Loanding...
-      </div>
-      )}  
+        </div>
+      )}
 
       <ul>
         {categorias.map((categoria, indice) => {
