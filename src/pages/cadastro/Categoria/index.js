@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField'
-
 import Button from '../../../components/Button';
+import useForm from '../../../hocks/useForm';
+
+
 
 function CadastroCategoria() {
 
@@ -12,22 +14,14 @@ function CadastroCategoria() {
     descricao: '',
     cor: '',
   }
+  const { handleChange, values, clearForm} = useForm(valoresIniciais);
+
   const [categorias, setCategorias] = useState([]);
-  const [values, setValues] = useState(valoresIniciais);
 
 
 
-  function setValue(chave, valor) {
-    setValues({
-      ...values,
-      [chave]: valor,
-    })
-  }
 
-  function handleChange(infosDoEvento) {
-    setValue(infosDoEvento.target.getAttribute('name'),
-      infosDoEvento.target.value);
-  }
+
 
   /*function handleChange(infosDoEvento) {
     const { getAttribute, value } = infosDoEvento.target;
@@ -77,7 +71,7 @@ function CadastroCategoria() {
   return (
     <PageDefault>
 
-      <h1>Cadastro de Categoria: {values.nome} </h1>
+      <h1>Cadastro de Categoria: {values.titulo} </h1>
 
       <form onSubmit={function handleSubmit(infosDoEvento) {
         infosDoEvento.preventDefault();
@@ -86,15 +80,15 @@ function CadastroCategoria() {
           values
         ]);
 
-        setValues(valoresIniciais)
+        clearForm();
 
       }}>
 
         <FormField
-          label="Nome da Categoria"
+          label="Título da Categoria"
           type="text"
-          name="nome"
-          value={values.nome}
+          name="titulo"
+          value={values.titulo}
           onChange={handleChange}
         />
 
@@ -134,8 +128,8 @@ function CadastroCategoria() {
       <ul>
         {categorias.map((categoria, indice) => {
           return (
-            <li key={`${categoria.nome}`}>
-              {categoria.nome}
+            <li key={`${categoria.titulo}`}>
+              {categoria.titulo}
             </li>
           )
         })}
